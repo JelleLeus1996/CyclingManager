@@ -3,6 +3,7 @@ import { routes } from "./routes";
 import bodyParser from "koa-bodyparser";
 import { AppDataSource } from "./core/connection";
 import { runMigrationsAndSeed } from './core/migrationsAndSeed'
+import jwt from "koa-jwt";
 
 // Initialize the connection to the database
 AppDataSource.initialize()
@@ -19,7 +20,10 @@ AppDataSource.initialize()
     // Enable bodyParser with default options
     app.use(bodyParser());
 
-    app.use(routes.routes());
+    // Middleware below this line is only reached if JWT token is valid
+    app.use(jwt({ secret: 'config.jwtSecret' }).unless({ path: [/^\/swagger/] }));
+     
+    app.use(routes.routes()).use(routes.allowedMethods());
 
     app.listen(port, () => {
       console.log(`🚀 Server is running on port http://localhost:${port}/`);

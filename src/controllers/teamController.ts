@@ -26,8 +26,8 @@ export default class TeamController {
   //GET all teams limited - VIEW: ALL
   @request("get", "/teams")
   @summary("Get all teams")
-  @security([{ Bearer: [] }])
-  public static async getAllTeams(ctx: Context): Promise<void> {
+/*   @security([{ Bearer: [] }])
+ */  public static async getAllTeams(ctx: Context): Promise<void> {
     const teams = await teamService.getAllTeams();
     if (teams) {
       ctx.status = 200;
