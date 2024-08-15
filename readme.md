@@ -21,3 +21,6 @@ https://medium.com/@64anushka/building-a-restful-api-with-koa-and-typeorm-44bad6
 https://medium.com/@murillonahas2003/creating-a-simple-server-with-node-js-typescript-and-koa-js-292d53a9457e
 
 https://semihtekin.medium.com/understanding-clean-architecture-with-asp-net-4f52d9b0f2c4
+
+Routes with 'Limited' = public info (non-confidential) everyone may see 
+Routes with 'Full' = All info with financials (confidential)

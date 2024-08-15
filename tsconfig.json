@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "strictPropertyInitialization": false,
     /* Experimental Options */
     "experimentalDecorators": true, /* Enables experimental support for ES7 decorators. */

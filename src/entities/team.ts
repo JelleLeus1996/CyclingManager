@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Role } from "../models/roles";
 import { RiderEntity } from "./rider";
 import { SponsorEntity } from "./sponsor";
+import { RaceTeamEntity } from "./raceTeam";
 
 @Entity()
 export class TeamEntity {
@@ -46,6 +47,9 @@ export class TeamEntity {
 
   @OneToMany(() => SponsorEntity, rider => rider.team)
   sponsors: SponsorEntity[];
+
+  @OneToMany(() => RaceTeamEntity, raceTeam => raceTeam.team)
+  raceTeams: RaceTeamEntity[];
 }
 
 export const teamSchema = {

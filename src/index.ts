@@ -10,7 +10,7 @@ AppDataSource.initialize()
 
     //run migrations and seed the db
     await runMigrationsAndSeed();
-
+    
     //After filling the db, start koa server
     const app = new Koa();
 

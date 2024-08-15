@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { RaceTeamEntity } from "./raceTeam";
 
 @Entity()
 export class RaceEntity {
@@ -13,6 +14,10 @@ export class RaceEntity {
 
   @Column()
   location: string;
+
+  // In RaceEntity
+  @OneToMany(() => RaceTeamEntity, raceTeam => raceTeam.race)
+  raceTeams: RaceTeamEntity[];
 
 }
 

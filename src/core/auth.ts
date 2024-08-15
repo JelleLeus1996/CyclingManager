@@ -2,20 +2,22 @@ import {userService} from '../services/userService';
 import Koa from 'koa';
 import {generateJWT, verifyJWT} from '../core/jwt';
 
-const requireAuthentication = async (ctx: Koa.Context, next: Koa.Next): Promise<any> => {
-  const authHeader = ctx.headers.authorization;
-  console.log('Authorization header:', authHeader);
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+const requireAuthentication = async (ctx: Koa.Context, next: Koa.Next): Promise<any> =>{
+  const {authorization}=ctx.headers;
+  if (!authorization) {
     ctx.throw(401, 'You need to be signed in');
   }
-
-  const token = authHeader.slice(7); // Remove 'Bearer ' from the token
   try {
-    const payload = await verifyJWT(token);
-    ctx.state.user = payload; // Store payload in state for later use
-    await next(); // Token is valid, proceed to the next middleware
+    const { authToken, ...session } = await userService.checkAndParseSession(authorization);
+    console.log('Session data:', session); // Add logging
+
+    ctx.state.session = session;
+    ctx.state.authToken = authToken;
+
+    return next();
   } catch (error) {
-    ctx.throw(401, 'Invalid or expired token');
+    console.error('Authentication error:', error); // Add logging
+    ctx.throw(401, 'Invalid authentication token');
   }
 };
 /* const requireAuthentication = async (ctx: Koa.Context, next: Koa.Next): Promise<any> =>{
