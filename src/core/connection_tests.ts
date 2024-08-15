@@ -21,7 +21,7 @@ export const AppDataSource = new DataSource({
   port: databaseConfig.port,
   username: databaseConfig.username,
   password: databaseConfig.password,
-  database: databaseConfig.name, 
+  database: "cyclingDatabase_tests", 
   synchronize: true, 
   logging: true,
   entities: [TeamEntity,RiderEntity,RaceEntity,SponsorEntity,UserEntity, RaceTeamEntity],

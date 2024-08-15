@@ -3,11 +3,13 @@ import { routes } from "./routes";
 import bodyParser from "koa-bodyparser";
 import { AppDataSource } from "./core/connection";
 import { runMigrationsAndSeed } from './core/migrationsAndSeed'
+import 'dotenv/config'
 
 // Initialize the connection to the database
 AppDataSource.initialize()
   .then(async () => {
 
+    console.log('Database password from .env:', process.env.DATABASE_PASSWORD);
     //run migrations and seed the db
     await runMigrationsAndSeed();
     

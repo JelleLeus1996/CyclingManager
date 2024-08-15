@@ -1,4 +1,5 @@
 "use strict";
+import 'dotenv/config'
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     port: 9000,
@@ -15,7 +16,7 @@ exports.default = {
         host: "localhost",
         port: 3306,
         username: "root",
-        password: "",
+        password: process.env.DATABASE_PASSWORD,
         name: "cyclingdatabase",
     },
     auth: {
