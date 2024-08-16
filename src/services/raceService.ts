@@ -96,9 +96,10 @@ class RaceService {
     if (valid.error) {
       throw new Error(valid.error.details[0].message);
     } else {
-      raceToBeUpdated.name = updatedRace.name;
-      raceToBeUpdated.date = updatedRace.date;
-      raceToBeUpdated.location = updatedRace.location;
+      const { name, date, location } = updatedRace;
+      raceToBeUpdated.name = name;
+      raceToBeUpdated.date = date;
+      raceToBeUpdated.location = location; 
       return await this.raceRepository.save(raceToBeUpdated);
     }
   }

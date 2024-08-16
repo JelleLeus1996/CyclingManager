@@ -1,18 +1,18 @@
 import config from 'config'; // 👈 2
-import { AppDataSource } from '../src/core/connection_tests';
-import { TeamEntity } from '../src/entities/team';
-import { RiderEntity } from '../src/entities/rider';
-import { SponsorEntity } from '../src/entities/sponsor';
-import { UserEntity } from '../src/entities/user';
-import { RaceEntity } from '../src/entities/race';
-import { RaceTeamEntity } from '../src/entities/raceTeam';
-import { initializeLogger } from '../src/core/logging'; // 👈 2
-import { Role } from '../src/models/roles'; // 👈 4
-import { Team } from '../src/models/team';
-import { Rider } from '../src/models/rider';
+import { AppDataSource } from '../core/connection_tests';
+import { TeamEntity } from '../entities/team';
+import { RiderEntity } from '../entities/rider';
+import { SponsorEntity } from '../entities/sponsor';
+import { UserEntity } from '../entities/user';
+import { RaceEntity } from '../entities/race';
+import { RaceTeamEntity } from '../entities/raceTeam';
+import { initializeLogger } from '../core/logging'; // 👈 2
+import { Role } from '../models/roles'; // 👈 4
+import { Team } from '../models/team';
+import { Rider } from '../models/rider';
  
 //Test data
-const teams : Team[] = [
+const teams = [
     {
       name: 'Canyon//SRAM Racing',
       country: 'Germany',
@@ -40,7 +40,7 @@ const teams : Team[] = [
       overhead_cost: 60000000,
     }
   ]
-  const riders: Rider[] = [
+  const riders = [
     { riderId:1, nationality:'Poland', last_name:'Niewiadoma', first_name:'Katarzyna', birthday: new Date('1994-09-29'), points:10763, teamId:1, monthly_wage:50047.57 },
     { riderId:2, nationality:'Australia', last_name:'Cromwell', first_name:'Tiffany', birthday: new Date('1988-07-06'), points:3604, teamId:1, monthly_wage:7192.01 },
     { riderId:3, nationality:'Italy', last_name:'Paladin', first_name:'Soraya', birthday: new Date('1994-04-11'), points:3372, teamId:1, monthly_wage:6517.66 },
@@ -94,7 +94,7 @@ export async function runMigrationsAndSeed() {
     await AppDataSource.initialize();
     
     // Insert the test teams
-    runMigrationsAndSeed();
+    await runMigrationsAndSeed();
     
     
 };

@@ -3,7 +3,7 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import { routes } from "./routes";
 
-export async function createServer() {
+export default function createServer() {
   const app = new Koa();
 
   // Enable bodyParser with default options
@@ -14,3 +14,4 @@ export async function createServer() {
 
   return app;
 }
+

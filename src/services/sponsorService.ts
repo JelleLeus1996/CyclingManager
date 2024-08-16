@@ -88,10 +88,11 @@ class SponsorService {
     if (valid.error) {
       throw new Error(valid.error.details[0].message);
     } else {
-      sponsorToBeUpdated.name = updatedSponsor.name;
-      sponsorToBeUpdated.industry = updatedSponsor.industry;
-      sponsorToBeUpdated.contribution = updatedSponsor.contribution;
-      sponsorToBeUpdated.teamId = updatedSponsor.teamId;
+      const { name, industry, contribution, teamId} = updatedSponsor;
+      sponsorToBeUpdated.name = name;
+      sponsorToBeUpdated.industry = industry;
+      sponsorToBeUpdated.contribution = contribution; 
+      sponsorToBeUpdated.teamId = teamId; 
 
       return await this.sponsorRepository.save(sponsorToBeUpdated);
     }

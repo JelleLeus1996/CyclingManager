@@ -1,25 +1,22 @@
-// rider.spec.ts
-import request from 'supertest';
-import { AppDataSource } from '../../src/core/connection_tests';
-import { createServer } from '../../src/createServer';
-import { RiderEntity } from '../../src/entities/rider';
-import { Rider } from '../../src/models/rider';
-import Koa from 'koa'
+import { withServer, login, loginAdmin } from '../supertest.setup'
+import { AppDataSource } from '../../core/connection_tests';
+import { RiderEntity } from '../../entities/rider';
 
 describe('RiderService', () => {
-  let app : Koa;
-  let testRider: RiderEntity;
-  
+  let request;
+  let authHeader: string;
+  let authHeaderAdmin: string;
+
+  withServer(({ request: r }) => {
+    request = r;
+  });
+
   beforeAll(async () => {
-    await AppDataSource.initialize();
-    app = await createServer();
-});
+    authHeader = await login(request);
+    authHeaderAdmin = await loginAdmin(request);
+  });
 
   afterAll(async () => {
-    // Clean up the test rider
-    const riderRepo = AppDataSource.getRepository(RiderEntity);
-    await riderRepo.delete({ riderId: testRider.riderId });
-
     await AppDataSource.destroy();
   });
 

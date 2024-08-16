@@ -127,14 +127,13 @@ class RiderService {
     if (valid.error) {
       throw new Error(valid.error.details[0].message);
     } else {
-      const riderToBeSaved: RiderEntity = new RiderEntity();
-      riderToBeSaved.first_name = rider.first_name;
-      riderToBeSaved.last_name = rider.last_name;
-      riderToBeSaved.nationality = rider.nationality;
-      riderToBeSaved.birthday = rider.birthday;
-      riderToBeSaved.points = rider.points || 0;
-      riderToBeSaved.teamId = rider.teamId;
-      riderToBeSaved.monthly_wage = rider.monthly_wage || 250;
+      let riderToBeSaved: RiderEntity = new RiderEntity();
+      riderToBeSaved = {
+        ...riderToBeSaved,
+        ...rider,
+        points: rider.points || 0,
+        monthly_wage: rider.monthly_wage || 250,
+      }; 
 
       console.log(riderToBeSaved, "riderToBeSaved");
       await this.riderRepository.save(riderToBeSaved);

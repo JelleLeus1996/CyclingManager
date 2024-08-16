@@ -4,3 +4,4 @@ export interface Race {
     date:Date;
     location:string;
   }
+  
